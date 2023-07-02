@@ -21,15 +21,22 @@
 				<div class="details-banner">
 					<div class="details-banner--overlay"></div>
 					<div class="details-banner--hero">
-						<%--<img class="details-banner--hero--img" src="./PageToSync/img/31.jpg" srcset="./PageToSync/img/31.jpg, ./PageToSync/img/31.jpg 2x" alt="Bethel Music"/>--%>
-						<asp:Image ID="heroArtist" runat="server" CssClass="details-banner--hero--img" AlternateText="Bethel Music" />
-
+						 
+			<%--Server side Banner image--%>
+						<asp:Image ID="heroArtist" runat="server" CssClass="details-banner--hero--img" AlternateText=" " />
+					<%--end--%>
 					</div>
 					<div class="details-banner--info">
 						<a href="#" class="details-banner--info--box">
 								<asp:Image ID="imgArtist" runat="server" CssClass="details-banner--info--box--img" />
 						</a>
-						<h1 class="details-banner--info--name"><a class="details-banner--info--name--link" href="#"><asp:Label ID="titleArtist" runat="server"></asp:Label></a></h1>
+
+						<h1 class="details-banner--info--name">
+							<a class="details-banner--info--name--link" href="#">
+							<%--Artist title--%>
+								<asp:Label ID="titleArtist" runat="server"></asp:Label>
+								<%--end--%>
+							</a></h1>
 					</div>
 				</div>
 
@@ -39,10 +46,10 @@
 							<a class="tab-filter" href="artistDetails.aspx">Overview</a>
 						</li>
 						<li class="discovery--nav--list--item tab-filter--item">
-							<a class="tab-filter" href="../artists/songs/details.aspx">Songs</a>
+							<a class="tab-filter" href="#">Songs</a>
 						</li>
 						<li class="discovery--nav--list--item tab-filter--item">
-							<a class="tab-filter" href="../artists/albums/details.aspx">Albums</a>
+							<a class="tab-filter" href="#">Albums</a>
 						</li>
 					</ul> <!-- /.browse-header-filters -->
 				</nav>
@@ -74,7 +81,7 @@
 											 
 										</li>
 
-							<%--Data binding starts for songs--%>
+							<%--Tops songs--%>
 							<asp:Repeater ID="songRepeater" runat="server">
 								   <ItemTemplate>
 										<li class="song-list--item media-player--row">
@@ -115,7 +122,7 @@
 										</li><!-- /.song-list-item -->
 									   </ItemTemplate>
 								</asp:Repeater> 
-							<%--data binding ends here--%>
+							<%--top songs ends here--%>
 
 									</ul><!-- /.song-list -->
 
