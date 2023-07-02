@@ -73,20 +73,23 @@
 											</div>
 											 
 										</li>
-					<%--		<asp:Repeater ID="songRepeater" runat="server">
+
+							<%--Data binding starts for songs--%>
+							<asp:Repeater ID="songRepeater" runat="server">
 								   <ItemTemplate>
 										<li class="song-list--item media-player--row">
 
 											<div class="song-list--item--player-img media-player">
-												<img class="song-list--item--player-img--img" 
-												srcset='<%# Eval("imageURL") %> 2x' 
-												src='<%#Eval("imageURL") %>' alt=""/>
+												<img class="song-list--item--player-img--img"
+													srcset='<%# Eval("albImageUrl") + " 2x" %>'
+													src='<%# Eval("albImageUrl") %>'
+													alt="" />
 											</div>
 
 											<div class="song-list--item--right">
-												<a href="#" class="song-list--item--primary"><%# Eval("songtitle") %></a>
-												<a class="song-list--item--secondary"style="margin-left:4vw"><%# Eval("albumName") %></a>
-												<a class="song-list--item--secondary"style="margin-left:4vw"><%# Eval("bpm") %> BPM</a>
+												<a href="#" class="song-list--item--primary"><%# Eval("songTitle") %></a>
+												<a class="song-list--item--secondary"style="margin-left:4vw"><%# Eval("albTitle") %></a>
+												<a class="song-list--item--secondary"style="margin-left:4vw"><%# Eval("sgBpm") %> BPM</a>
 												<a class="song-list--item--secondary"style="margin-left:6vw">4/4</a>
 												<div class="song-list--item--icon--holder">
 													<a href="#" class="song-list--item--icon--wrap" style="display: inline-block">
@@ -111,12 +114,12 @@
 											</div><!-- /.song-list-item-right -->
 										</li><!-- /.song-list-item -->
 									   </ItemTemplate>
-								</asp:Repeater>--%>
-										
-                                
-                            
+								</asp:Repeater> 
+							<%--data binding ends here--%>
 
 									</ul><!-- /.song-list -->
+
+
 								</section><!-- /.songs-section -->
 
 								<div class="discovery--space-saver">
@@ -129,24 +132,24 @@
 										<div class="discovery--grid-holder">
 
 											<div class="ly-grid ly-grid-cranberries">
+											
+									<%--Code for ALBUMS--%>
+											<asp:Repeater ID="albumRepeater" runat="server">
+											  <ItemTemplate>
 
 												<div class="media-item">
 													<a class="media-item--img--link" href="#" tabindex="0">
-														<img class="media-item--img" alt="Reckless Love" src="./PageToSync/img/210.jpg" srcset="./PageToSync/img/210.jpg, ./PageToSync/img/210.jpg 2x"/>
-														<span class="image-tag">Master</span>
+														<img class="media-item--img" alt="" src='<%# Eval("albImageUrl") %>' srcset='<%# Eval("albImageUrl") + " 2x" %>'/>
+														<span class="image-tag">Master</span>		 
 													</a>
-													<a class="media-item--title" href="#" tabindex="0">Reckless Love</a>
-													<a class="media-item--subtitle" href="#" tabindex="0">Cory Asbury</a>
+													<a class="media-item--title" href="#" tabindex="0"><%# Eval("albTitle") %></a>
+													<a class="media-item--subtitle" href="#" tabindex="0"><%# Eval("songTitle") %></a>
 												</div>
-												<div class="media-item">
-													<a class="media-item--img--link" href="#" tabindex="0">
-														<img class="media-item--img" alt="Reckless Love" src="./PageToSync/img/210.jpg" srcset="./PageToSync/img/210.jpg, ./PageToSync/img/210.jpg 2x"/>
-														<span class="image-tag">Master</span>
-													</a>
-													<a class="media-item--title" href="#" tabindex="0">Reckless Love</a>
-													<a class="media-item--subtitle" href="#" tabindex="0">Cory Asbury</a>
-												</div>
-											 
+
+											</ItemTemplate>
+										</asp:Repeater>
+									<%--end of ALBUMS--%>
+
 											</div><!-- /.grid -->
 										</div><!-- /.discovery-grid-holder -->
 									</section><!-- /.songs-section -->
@@ -158,12 +161,12 @@
 									</div><!-- /.discovery-section-header -->
 
 									<div class="artist-details--biography biography">
-										 
+									<%--Biography	--%> 
  										<p>
 											 <asp:Label ID="bioArtist" runat="server"></asp:Label>
 
  										</p>
-
+									<%--	end of biography--%>
 										<a href="#">Read More...</a>
 									</div>
 								</section><!-- /.biography-section -->

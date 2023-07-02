@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 public partial class artistDetails : System.Web.UI.Page
 {
-	protected void Page_Load(object sender, EventArgs e)
+	protected void Page_Load(object sender, EventArgs e )
 	{
 		var sql = new SQL();
 
@@ -25,27 +25,17 @@ public partial class artistDetails : System.Web.UI.Page
 				// Add the parameter to the SQL parameters collection
 				sql.Parameters.Add(artistIDParam);
 
-				var artistData = sql.ExecuteStoredProcedureDT("GetArtistDetails");
+				//One-time pulling from stored procedure
+				DataTable artistCompleteData = sql.ExecuteStoredProcedureDT("GetArtistDetails");
 
-				if (artistData.Rows.Count > 0)
-				{
-					var heroUrl = artistData.Rows[0]["heroURL"].ToString();
-					heroArtist.ImageUrl = heroUrl;
+				//For top banner and all other details within it.
+				BannerDetailsAndBiography(artistCompleteData);
 
-					var imgUrl = artistData.Rows[0]["imageURL"].ToString();
-					imgArtist.ImageUrl = imgUrl;
+				//for The Top Songs Division
+				topSongs_Div(artistCompleteData);
 
-					var name = artistData.Rows[0]["title"].ToString();
-					titleArtist.Text = name;
-
-					var biography = artistData.Rows[0]["biography"].ToString();
-					bioArtist.Text = biography;
-				}
-				else
-				{
-					// Handle the case when artistID is not found or is null
-					// Set a default image or display an error message
-				}
+				//for all the Artist's albums
+				AllAlbums(artistCompleteData);
 			}
 		}
 	}
@@ -56,80 +46,60 @@ public partial class artistDetails : System.Web.UI.Page
 
 
 
+	void BannerDetailsAndBiography(DataTable AllData)
+	{
+		if (AllData.Rows.Count > 0)
+		{
+			var artistheroUrl = AllData.Rows[0]["artHeroURL"].ToString();
+			heroArtist.ImageUrl = artistheroUrl;
 
-	//protected void Page_Load(object sender, EventArgs e)
-	//{
-	//	var sql = new SQL();
+			var artistimgUrl = AllData.Rows[0]["artImgUrl"].ToString();
+			imgArtist.ImageUrl = artistimgUrl;
 
-	//	if (!IsPostBack)
-	//	{
-	//		if (int.TryParse(Request.QueryString["artistID"], out int artistID))
-	//		{
-	//			var query = "IF NOT EXISTS (SELECT * FROM dbo.Artist WHERE artistID = @artistID)" +
-	//						" SET @artistID = 1;" +
-	//						" SELECT * FROM dbo.Artist WHERE artistID = @artistID";
+			var artistname = AllData.Rows[0]["ArtistTitle"].ToString();
+			titleArtist.Text = artistname;
 
-	//			// Create the SQL parameter for artistID
-	//			var artistIDParam = new SqlParameter("@artistID", SqlDbType.Int);
-	//			artistIDParam.Value = artistID;
-
-	//			// Add the parameter to the SQL parameters collection
-	//			sql.Parameters.Add(artistIDParam);
-
-	//			var artistData = sql.ExecuteDT(query);
-
-	//			if (artistData.Rows.Count > 0)
-	//			{
-	//				var heroUrl = artistData.Rows[0]["heroURL"].ToString();
-	//				heroArtist.ImageUrl = heroUrl;
-
-	//				var imgUrl = artistData.Rows[0]["imageURL"].ToString();
-	//				imgArtist.ImageUrl = imgUrl;
-
-	//				var name = artistData.Rows[0]["title"].ToString();
-	//				titleArtist.Text = name;
-
-	//				var biography = artistData.Rows[0]["biography"].ToString();
-	//				bioArtist.Text = biography;
-
-	//			}
-	//			else
-	//			{
-	//				// Handle the case when artistID is not found or is null
-	//				// Set a default image or display an error message
-	//			}
-	//		}
-	//	}
-	//}
+			var biography = AllData.Rows[0]["ArtistBiography"].ToString();
+			bioArtist.Text = biography;
+		}
+		else
+		{
+			// Handle the case when artistID is not found or is null
+			// Set a default image or display an error message
+		}
+	}
 
 
-
-	//protected void Page_Load(object sender, EventArgs e)
-	//{
-	//	var sql = new SQL();
-
-	//	if (!IsPostBack)
-	//	{
-	//		if (int.TryParse(Request.QueryString["artistID"], out int artistID))
-	//		{
-	//			// Call the ExecuteStoredProcedureDS method passing the GetArtistDetails stored procedure as a parameter
-	//			DataSet artistData = sql.ExecuteStoredProcedureDS($"GetArtistDetails {artistID}");
-
-	//			// Check if the dataset contains any tables
-	//			if (artistData.Tables.Count > 0)
-	//			{
-	//				// Assuming you want to display the first table from the dataset
-	//				DataTable artistTable = artistData.Tables[0];
-	//				var imageUrl = artistTable.Rows[0]["imageURL"].ToString();
-
-	//				// Bind the artistTable to your UI controls or use the data as needed
-
-	//			}
-	//		}
-	//	}
-	//}
+	void topSongs_Div(DataTable AllData) 
+	{
+		if (AllData.Rows.Count > 0)
+		{
+			 
+			// Bind the Repeater control to the data source
+			songRepeater.DataSource = AllData;
+			songRepeater.DataBind();
+		}
+		else
+		{
+			// Handle the cases where artistID is not found or is null
+			// Set a default image or display an error message
+		}
+	}
 
 
+	void AllAlbums(DataTable AllData)
+	{
+		if (AllData.Rows.Count > 0)
+		{
+			// Bind the Repeater control to the data source
+			albumRepeater.DataSource = AllData;
+			albumRepeater.DataBind();
+		}
+		else
+		{
+			// Handle the cases where artistID is not found or is null
+		}
+	}
 
 
 }
