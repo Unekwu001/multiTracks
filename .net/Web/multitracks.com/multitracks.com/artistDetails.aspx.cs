@@ -10,7 +10,6 @@ using System.Web.UI.WebControls;
 
 public partial class artistDetails : System.Web.UI.Page
 {
-
 	protected void Page_Load(object sender, EventArgs e)
 	{
 		var sql = new SQL();
@@ -19,10 +18,6 @@ public partial class artistDetails : System.Web.UI.Page
 		{
 			if (int.TryParse(Request.QueryString["artistID"], out int artistID))
 			{
-				var query = "IF NOT EXISTS (SELECT * FROM dbo.Artist WHERE artistID = @artistID)" +
-							" SET @artistID = 1;" +
-							" SELECT * FROM dbo.Artist WHERE artistID = @artistID";
-
 				// Create the SQL parameter for artistID
 				var artistIDParam = new SqlParameter("@artistID", SqlDbType.Int);
 				artistIDParam.Value = artistID;
@@ -30,7 +25,7 @@ public partial class artistDetails : System.Web.UI.Page
 				// Add the parameter to the SQL parameters collection
 				sql.Parameters.Add(artistIDParam);
 
-				var artistData = sql.ExecuteDT(query);
+				var artistData = sql.ExecuteStoredProcedureDT("GetArtistDetails");
 
 				if (artistData.Rows.Count > 0)
 				{
@@ -45,7 +40,6 @@ public partial class artistDetails : System.Web.UI.Page
 
 					var biography = artistData.Rows[0]["biography"].ToString();
 					bioArtist.Text = biography;
-
 				}
 				else
 				{
@@ -55,6 +49,58 @@ public partial class artistDetails : System.Web.UI.Page
 			}
 		}
 	}
+
+
+
+
+
+
+
+
+	//protected void Page_Load(object sender, EventArgs e)
+	//{
+	//	var sql = new SQL();
+
+	//	if (!IsPostBack)
+	//	{
+	//		if (int.TryParse(Request.QueryString["artistID"], out int artistID))
+	//		{
+	//			var query = "IF NOT EXISTS (SELECT * FROM dbo.Artist WHERE artistID = @artistID)" +
+	//						" SET @artistID = 1;" +
+	//						" SELECT * FROM dbo.Artist WHERE artistID = @artistID";
+
+	//			// Create the SQL parameter for artistID
+	//			var artistIDParam = new SqlParameter("@artistID", SqlDbType.Int);
+	//			artistIDParam.Value = artistID;
+
+	//			// Add the parameter to the SQL parameters collection
+	//			sql.Parameters.Add(artistIDParam);
+
+	//			var artistData = sql.ExecuteDT(query);
+
+	//			if (artistData.Rows.Count > 0)
+	//			{
+	//				var heroUrl = artistData.Rows[0]["heroURL"].ToString();
+	//				heroArtist.ImageUrl = heroUrl;
+
+	//				var imgUrl = artistData.Rows[0]["imageURL"].ToString();
+	//				imgArtist.ImageUrl = imgUrl;
+
+	//				var name = artistData.Rows[0]["title"].ToString();
+	//				titleArtist.Text = name;
+
+	//				var biography = artistData.Rows[0]["biography"].ToString();
+	//				bioArtist.Text = biography;
+
+	//			}
+	//			else
+	//			{
+	//				// Handle the case when artistID is not found or is null
+	//				// Set a default image or display an error message
+	//			}
+	//		}
+	//	}
+	//}
 
 
 
