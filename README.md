@@ -19,5 +19,5 @@ ASP.NET CORE WEB API  was used for this project.
 2.  Run the Project with Debugging.
 3.  The Project will automatically take you to a Swagger GUI. Use the Gui to test if API works well and makes the right calls.(POST And GET).
 4.  All APIs (methods) are found within the Controllers Folder.
-5.  The Repositories Folder is where the Data Logic Happens. It contains Artist and Song Repositories.
+5.  The Repositories Folder is where the Data Logic Happens. It contains Artist and Song Repositories along with their Contracts(Interfaces).
 6.  Dependency injection was used within the project to ensure the project is in compliance with both OOP and SOLID Principles.
