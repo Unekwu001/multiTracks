@@ -37,6 +37,7 @@ public partial class artistDetails : System.Web.UI.Page
 				//for all the Artist's albums
 				AllAlbums(artistCompleteData);
 			}
+
 		}
 	}
 
@@ -46,7 +47,7 @@ public partial class artistDetails : System.Web.UI.Page
 
 
 
-	void BannerDetailsAndBiography(DataTable AllData)
+	private void BannerDetailsAndBiography(DataTable AllData)
 	{
 		if (AllData.Rows.Count > 0)
 		{
@@ -70,7 +71,7 @@ public partial class artistDetails : System.Web.UI.Page
 	}
 
 
-	void topSongs_Div(DataTable AllData) 
+	private void topSongs_Div(DataTable AllData) 
 	{
 		if (AllData.Rows.Count > 0)
 		{
@@ -87,7 +88,7 @@ public partial class artistDetails : System.Web.UI.Page
 	}
 
 
-	void AllAlbums(DataTable AllData)
+	private void AllAlbums(DataTable AllData)
 	{
 		if (AllData.Rows.Count > 0)
 		{
