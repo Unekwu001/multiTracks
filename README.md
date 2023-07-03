@@ -1,4 +1,4 @@
-STEPS TO VIEW OR OPEN AN ARTIST'S DETAILS PAGE
+STEPS TO VIEW ARTIST DETAILS PAGE
 -----------------------------------------------
 The project targets passing data to the details page  through the url and dynamically generating the page's content ( images and pictures). It makes use of the MTData Access Library to handle data request. The "**GetArtistDetails**" stored procedure was the sole QueryHouse.
 Below are the steps to follow in other to successfully load and run the project.
