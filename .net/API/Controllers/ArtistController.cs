@@ -21,15 +21,18 @@ namespace API.Controllers
 		[HttpGet("search")]
 		public string SearchArtistByName(string artistName) 
 		{
+
+			// variable matchingArtist collects and saves the JSon coming from SearchArtistFromDatabase method.
 			var matchingArtists = _artistRepository.SearchArtistsFromDatabase(artistName);
+
 
 			if (matchingArtists == "")
 			{
-				return $"{artistName} Not found"; // Return 404 Not Found if no matching artists are found
+				return $"Oops, {artistName} Not found"; // Return 404 Not Found if no matching artists are found
 			}
 			else
 			{
-				return $"{artistName} was found"; // Return 200 OK with the matching artists
+				return $"Great!, {artistName} was found"; // Return 200 OK with the matching artists
 			}
 		}
 

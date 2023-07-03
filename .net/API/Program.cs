@@ -12,13 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IArtistRepository, ArtistRepository>(provider => new ArtistRepository("Data source=localhost;DATABASE=MultiTracksDB;Integrated Security=True"));
 
-//builder.Services.AddControllers().AddJsonOptions(options =>
-//{
-//	options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-//	options.JsonSerializerOptions.MaxDepth = 64; // or a higher value
-//												 // Other serialization options
-//});
-
+ 
 
 var app = builder.Build();
 
