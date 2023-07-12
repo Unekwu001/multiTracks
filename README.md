@@ -5,7 +5,7 @@ Below are the steps to follow in other to successfully load and run the project.
 
 0.  Open the solution in Visual Studio. Right-click on the "multitracks.com" project and select "**Set as Startup project**".
 1.  Run "Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r" from the Package Manager Console.
-2.  Load the project. When loaded, head over to change the database connection string found within the Web.config file.
+2.  Load the project. When loaded, head over to change the database connection string found within the Web.config file. Ensure to change the connection string to your desired database connection string.
 3.  Test the Details page using the url. For example if you are using your local machine and you want to view the Artist with ID of 2, you will need to  visit:  **localhost/artistDetails.aspx?artistID=2.** This will automatically generate a details page for the artist with ID of 2.
 4.  You may continue to test the page by changing the value of the ID to see how it dynamically generates the details of the Artist.
 5.  The code was further refactored such that if a non-existing ID is entered, it redirects you to the Artist with ID of 1. (This is for development and test purposes).
